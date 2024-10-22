@@ -242,7 +242,6 @@ generate_response("what is the capital of ethiopia?")
 
 import spacy
 
-# Load SpaCy model for intent recognition
 nlp = spacy.load("en_core_web_sm")
 
 def extract_keywords_and_intent(query):
@@ -258,16 +257,12 @@ def extract_keywords_and_intent(query):
 
 
 def create_customer_support_response(customer_query):
-    # Extract keywords and intent
     keywords, intent = extract_keywords_and_intent(customer_query)
     
-    # Retrieve documents based on the query
     retrieved_docs = retrieve_documents(customer_query)
     
-    # Combine relevant documents
     combined_docs = "\n".join([get_document_text(doc_id) for doc_id in retrieved_docs])
     
-    # Create a structured prompt based on intent
     if intent == "comparison":
         final_prompt = (
             f"Customer question: {customer_query}\n\n"
@@ -289,5 +284,4 @@ def create_customer_support_response(customer_query):
     
     return generate_response(final_prompt)
 
-# Example usage
 create_customer_support_response("what is an your warranty like, explain in 5 steps")
